@@ -11,6 +11,8 @@ lists = board['lists']
 list_id_to_name = {}
 list_names_to_pos = {}
 for _list in lists:
+    if _list['closed']:
+        continue
     list_id_to_name[_list['id']] = _list['name']
     list_names_to_pos[_list['name']] = _list['pos']
 
@@ -20,6 +22,9 @@ for card in cards:
     votes = 0
     if 'votes' in card['badges']:
         votes = card['badges']['votes']
+
+    if votes == 0:
+        continue
 
     cards_cleaned.append(
         {
@@ -81,7 +86,7 @@ with open('trello.csv', 'w') as file:
             else:
                 row_str += '{},"{}",'.format(
                     item['votes'],
-                    item['name'].encode('utf-8')
+                    item['name'].encode('utf-8').replace('"', '\'')
                 )
 
         row_str = row_str[:-1] + '\n'
