@@ -52,7 +52,7 @@ with open('trello.csv', 'w') as file:
 
     header = ''
     for list_name in list_names:
-        header += 'votes,{},'.format(list_name)
+        header += 'votes,{},'.format(list_name.encode('utf-8'))
     header = header[:-1] + '\n'
 
     file.write(header)
