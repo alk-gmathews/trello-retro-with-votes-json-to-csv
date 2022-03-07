@@ -3,7 +3,7 @@ from collections import defaultdict
 
 board = None
 with open('trello.json', 'r') as file:
-    board = json.loads(file.read())
+    board = json.loads(file.read() )
 
 cards = board['cards']
 lists = board['lists']
